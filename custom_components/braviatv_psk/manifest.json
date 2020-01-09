@@ -1,0 +1,12 @@
+{
+  "domain": "braviatv_psk",
+  "name": "Bravia TV PSK",
+  "documentation": "https://github.com/custom-components/media_player.braviatv_psk",
+  "requirements": [
+    "nanSonyTV==0.0.2"
+  ],
+  "dependencies": [],
+  "codeowners": [
+    "@gerard33"
+  ]
+}
