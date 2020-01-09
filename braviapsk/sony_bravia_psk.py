@@ -208,7 +208,13 @@ class BraviaRC(object):
         original_content_list = []
         resp = self.bravia_req_json("sony/avContent",
                                     self._jdata_build("getSourceList", {"scheme": "tv"}))
-        resp2 = self.bravia_req_json("sony/appControl", self._jdata_build("getApplicationList", None))
+        
+        applist = self.bravia_req_json("sony/appControl", self._jdata_build("getApplicationList", None))
+        
+        MyApp = ['Kodi', 'Spotify', '看TV', 'YouTube']
+        
+        newApp = [app for app in applist.get('result')[0] if app['title'] in MyApp]
+        
         if not resp.get('error'):
             results = resp.get('result')[0]
             for result in results:
@@ -229,7 +235,7 @@ class BraviaRC(object):
                     if not resp.get('error'):
                         original_content_list.extend(resp.get('result')[0])
 
-        original_content_list.extend(resp2.get('result')[0])
+        original_content_list.extend(newApp)
         return_value = collections.OrderedDict()
         for content_item in original_content_list:
             return_value[content_item['title']] = content_item['uri']
